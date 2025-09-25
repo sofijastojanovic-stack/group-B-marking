@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Group Marking Table</title>
   <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -31,13 +35,19 @@
       padding: 4px;
       box-sizing: border-box;
     }
+    button {
+      margin-top: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
 <h2>Group Marking Table – Scripts A to H</h2>
 
-<table>
+<table id="marking-table">
   <thead>
     <tr>
       <th>Script</th>
@@ -53,62 +63,68 @@
   </thead>
   <tbody>
     <tr><td class="paper-header" colspan="9">Paper 1</td></tr>
-    <tr>
-      <td>Script A</td>
-      <td class="max-marks">75</td>
+    <tr><td>Script A</td><td class="max-marks">75</td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
     </tr>
-    <tr>
-      <td>Script B</td>
-      <td class="max-marks">75</td>
+    <tr><td>Script B</td><td class="max-marks">75</td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
     </tr>
 
     <tr><td class="paper-header" colspan="9">Paper 2</td></tr>
-    <tr>
-      <td>Script C</td>
-      <td class="max-marks">75</td>
+    <tr><td>Script C</td><td class="max-marks">75</td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
     </tr>
-    <tr>
-      <td>Script D</td>
-      <td class="max-marks">75</td>
+    <tr><td>Script D</td><td class="max-marks">75</td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
     </tr>
 
     <tr><td class="paper-header" colspan="9">Paper 3</td></tr>
-    <tr>
-      <td>Script E</td>
-      <td class="max-marks">75</td>
+    <tr><td>Script E</td><td class="max-marks">75</td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
     </tr>
-    <tr>
-      <td>Script F</td>
-      <td class="max-marks">75</td>
+    <tr><td>Script F</td><td class="max-marks">75</td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
     </tr>
 
     <tr><td class="paper-header" colspan="9">Paper 4</td></tr>
-    <tr>
-      <td>Script G</td>
-      <td class="max-marks">75</td>
+    <tr><td>Script G</td><td class="max-marks">75</td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
     </tr>
-    <tr>
-      <td>Script H</td>
-      <td class="max-marks">75</td>
+    <tr><td>Script H</td><td class="max-marks">75</td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
       <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
     </tr>
   </tbody>
 </table>
+
+<button onclick="clearMarks()">Clear All Marks</button>
+
+<script>
+  const inputs = document.querySelectorAll("input[type='text']");
+  inputs.forEach((input, index) => {
+    const key = "mark-" + index;
+    input.id = key;
+    input.value = localStorage.getItem(key) || "";
+    input.addEventListener("input", () => {
+      localStorage.setItem(key, input.value);
+    });
+  });
+
+  function clearMarks() {
+    inputs.forEach((input, index) => {
+      const key = "mark-" + index;
+      localStorage.removeItem(key);
+      input.value = "";
+    });
+  }
+</script>
 
 </body>
 </html>
